@@ -80,7 +80,7 @@ stage ('Deploy Backend') {
 
                     git credentialsId: 'github_login', url: 'https://github.com/clark-ewerton/tasks-functional-tests'
 
-                    sh 'mvn test'
+                    bat 'mvn test'
 
                 }
 
