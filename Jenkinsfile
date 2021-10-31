@@ -18,6 +18,8 @@ scannerHome = tool 'SONAR_SCANNER'
             steps{
 			
 			bat "C:/dev/devops/postgres_sonar_selenium_grid.bat"
+			
+			sleep(60)
 		
 withSonarQubeEnv('SONAR_LOCAL'){
                 bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=deploy_back -Dsonar.host.url=http://localhost:9000 -Dsonar.login=6fcbbc6998a96a356027439d07eb31be394606c6 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn**,**/src/test/**,**/model/**,**/Application.java"
@@ -102,6 +104,18 @@ stage ('Deploy Backend') {
 bat 'docker-compose up -d'
               
 
+            }
+
+        }
+		
+			stage ('Health Check') {
+
+            steps {
+sleep(10)
+ dir('functional-test') {
+                    bat 'mvn verify -Dskip.surefire.tests'
+              
+}
             }
 
         }
