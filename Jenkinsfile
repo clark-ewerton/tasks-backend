@@ -35,6 +35,8 @@ waitForQualityGate abortPipeline: true
 stage ('Deploy Backend') {
 
             steps {
+			
+			bat "C:/dev/devops/tomcat.bat"
 
                 deploy adapters: [tomcat8(credentialsId: 'tomcat-login', path: '', url: 'http://localhost:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
 
