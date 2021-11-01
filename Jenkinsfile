@@ -126,6 +126,12 @@ sleep(10)
 		always{
 		junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml'
 		}
+		unsuccessful{
+		emailtext attachlog: true, body: 'See the attached log below', subject: 'BUILD $BUILD_NUMBER has failed', to: 'clark.silva@soc.com.br'
+		}
+		fixed{
+		emailtext attachlog: true, body: 'See the attached log below', subject: 'BUILD is fine!', to: 'clark.silva@soc.com.br'
+		}
 		}
 		
 }
